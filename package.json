@@ -1,13 +1,15 @@
 {
   "name": "dcmapas-updates",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.1",
+  "description": "A bot to check for Dragon City data and send updates on DC Mapas Telegram Channel",
+  "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx ts-node ./src/check-alliance-chests.ts",
+    "build": "tsc",
+    "start": "node ./dist/check-alliance-chests.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Marcuth",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
