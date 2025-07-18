@@ -24,7 +24,7 @@ jobs:
 
       - name: Run TypeScript script
         run: |
-          npx ts-node src/check-alliance-chests.ts
+          npm run dev
         env:
           DITLEP_ENCRYPTION_IV: ${{ secrets.DITLEP_ENCRYPTION_IV }}
           DITLEP_ENCRYPTION_KEY: ${{ secrets.DITLEP_ENCRYPTION_KEY }}
