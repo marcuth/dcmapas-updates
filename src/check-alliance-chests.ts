@@ -8,7 +8,7 @@ import { fetchLocalization, LocalizationObject } from "./utils/fetch-localizatio
 import { fetchDitelp } from "./utils/fetch-ditlep"
 import { config } from "./config"
 
-function findTodayAllianceChest(data: AllianceChestResponse): { id: string, startAt: string, endAt: string } | null {
+function findTodayAllianceChest(data: AllianceChestResponse) {
     const today = new Date()
 
     for (const range of data.dateRanges) {
@@ -18,8 +18,8 @@ function findTodayAllianceChest(data: AllianceChestResponse): { id: string, star
         const rangeAcceptableStart = new Date(rangeStartDate)
         rangeAcceptableStart.setHours(0, 0, 0, 0)
 
-        const rangeAcceptableEnd = new Date(rangeAcceptableStart.getDate() + 1)
-
+        const rangeAcceptableEnd = new Date(rangeAcceptableStart)
+        rangeAcceptableEnd.setDate(rangeAcceptableEnd.getDate() + 1)
 
         if (dateFns.isWithinInterval(today, { start: rangeStartDate, end: rangeAcceptableEnd })) {
             return {
