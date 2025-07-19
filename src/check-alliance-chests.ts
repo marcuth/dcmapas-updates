@@ -1,7 +1,6 @@
 import { abbreviateNumber } from "js-abbreviation-number"
 import * as dateFns from "date-fns"
 import { Telegraf } from "telegraf"
-import fs from "fs/promises"
 
 import { AllianceChest, AllianceChestResponse, Gatcha, RewardSet } from "./interfaces/alliance-chests"
 import { fetchLocalization, LocalizationObject } from "./utils/fetch-localization"
@@ -157,12 +156,10 @@ async function main() {
     })
 
     const localization = await fetchLocalization(config.localization.language)
-
-    await fs.writeFile("alliance-chests.json", JSON.stringify(data, null, 4))
     const allianceChest = await checkTodayAllianceChest(data, localization)
 
     if (allianceChest) {
-        const formattedStartDate = dateFns.format(new Date(allianceChest.startAt), "dd-MM")
+        const formattedStartDate = dateFns.format(new Date(allianceChest.startAt), "HH:SS dd-MM")
         const formattedEndDate = dateFns.format(new Date(allianceChest.endAt), "dd-MM")
         const duration = dateFns.differenceInDays(new Date(allianceChest.endAt), new Date(allianceChest.startAt))
         const targetScorePerMemberPerDay = 2500
