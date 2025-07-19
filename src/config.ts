@@ -10,6 +10,7 @@ export const config = {
         encryptionKey: env("DITLEP_ENCRYPTION_KEY")
     },
     localization: {
-        language: "br"
+        language: "br",
+        ditlepLanguage: "en"
     }
 }
