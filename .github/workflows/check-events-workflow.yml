@@ -1,0 +1,32 @@
+name: Run Check Alliance Chests Script Daily
+
+on:
+  schedule:
+    - cron: '0 11 * * *'  # 11h UTC = 8h BRT
+  workflow_dispatch:      # Permite execução manual
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Run TypeScript script
+        run: |
+          npx ts-node ./src/check-events.ts
+        env:
+          DITLEP_ENCRYPTION_IV: ${{ secrets.DITLEP_ENCRYPTION_IV }}
+          DITLEP_ENCRYPTION_KEY: ${{ secrets.DITLEP_ENCRYPTION_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_UPDATES_CHANNEL_ID: ${{ secrets.TELEGRAM_UPDATES_CHANNEL_ID }}
